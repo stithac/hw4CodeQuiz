@@ -37,7 +37,7 @@ var submitBtn = document.createElement("button");
 
 var instructionsEl = document.createElement("p");
 instructionsEl.setAttribute("class", "center");
-instructionsEl.innerHTML = "The <b>JavaScript Fundamentals Quiz</b> is a timed, multiple-choice coding quiz to test your knowledge of the JavaScript fundamentals.  You will have 60 seconds to complete the 5 questions, but BE CAREFUL! Any wrong answer will cost you 5 seconds! <br/><br/>  Click the <i>Start Quiz</i> button below to begin. Good Luck!!";
+instructionsEl.innerHTML = "The <b>JavaScript Fundamentals Quiz</b> is a timed, multiple-choice coding quiz to test your knowledge of the JavaScript fundamentals.  You will have 30 seconds to complete the 5 questions, but BE CAREFUL! Any wrong answer will cost you 5 seconds! <br/><br/>  Click the <i>Start Quiz</i> button below to begin. Good Luck!!";
 
 mainEl.appendChild(instructionsEl);
 
@@ -49,7 +49,7 @@ questionEl.setAttribute("class", "question");
 var userNameEl = document.createElement("input");
     userNameEl.setAttribute("type", "text");
 
-var secondsLeft = 61;
+var secondsLeft = 31;
 var numCorrect = 0;
 var numIncorrect = 0;
 
