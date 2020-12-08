@@ -184,7 +184,7 @@ function checkAnswer(index, button) {
 
         //If there are less than 6 seconds, set secondsLeft to 1. Otherwise, subtract 5 from secondsLeft for each wrong answer
         if(secondsLeft > 6){
-            secondsLeft -= 5;
+            secondsLeft -= 4;
         }else{
             secondsLeft = 1;
         }
