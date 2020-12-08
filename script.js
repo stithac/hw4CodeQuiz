@@ -191,7 +191,6 @@ function showResults(){
     nextBtn.remove();
     timeEl.textContent = 0;
 
-
     scoreEl = (numCorrect * 20);
 
     mainEl.innerHTML = "<b>Results:</b>";
@@ -207,7 +206,7 @@ function showResults(){
     mainEl.append(userNameEl);
 
     mainEl.appendChild(scoreArea);
-    scoreArea.innerHTML = "<b>Scores:</b>";
+    scoreArea.innerHTML = "<b>Recent Scores:</b>";
 
     footerEl.append(submitBtn);
 
@@ -222,9 +221,10 @@ function showResults(){
     //render scores to the DOM
     for(i = 0; i < scores.length; i++){
         var score = scores[i].score;
+        var name = scores[i].name;
 
         var li = document.createElement("li");
-        li.textContent = score;
+        li.textContent = score + ", " + name;
         li.setAttribute("data-index", i);
 
         scoreArea.appendChild(scoresList);
@@ -243,6 +243,7 @@ function submitQuiz(){
                 score: scoreEl
             }
 
+
             scores.push(userData);
 
             localStorage.setItem("scores", JSON.stringify(scores));
@@ -252,6 +253,7 @@ function submitQuiz(){
         }else{
             alert("Enter 2 chars! Example: AS for Ashley Stith");
         }
+        
 }
 
 function setTimer() {
