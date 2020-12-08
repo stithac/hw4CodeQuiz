@@ -1,58 +1,58 @@
+//Elements and divs
 var timeEl = document.querySelector(".time");
-timeEl.textContent = "Time: 0";
-
+    timeEl.textContent = "Time: 0";
+var headerEl = document.querySelector(".card-header");
 var mainEl = document.getElementById("main");
-var startBtn = document.getElementById("start");
 var footerEl = document.querySelector(".card-footer");
 
-var headerEl = document.querySelector(".card-header");
+//--instructionsEl displays the initial instructions
+var instructionsEl = document.createElement("p");
+    instructionsEl.setAttribute("class", "center");
+    instructionsEl.innerHTML = "The <b>JavaScript Fundamentals Quiz</b> is a timed, multiple-choice coding quiz to test your knowledge of the JavaScript fundamentals.  You will have 30 seconds to complete the 5 questions, but BE CAREFUL! Any wrong answer will cost you 5 seconds! <br/><br/>  Click the <i>Start Quiz</i> button below to begin. Good Luck!!";
 
+//--Elements used to display questions and score results
+var questionEl = document.createElement("p");
+    questionEl.setAttribute("class", "question");
 var correctEl = document.createElement("p");
     correctEl.textContent = "# Correct: "
     correctEl.setAttribute("class", "score right");
-
 var incorrectEl = document.createElement("p");
     incorrectEl.textContent = "# Incorrect: ";
     incorrectEl.setAttribute("class", "score right");
-
-var gifImg = document.createElement("img");
-    gifImg.setAttribute("class", "gif");
-
-var questionArea = document.createElement("div");
-var answerArea = document.createElement("div");
-
-var rationaleArea = document.createElement("div");
+var scoreEl = document.createElement("p");
 var rationaleEl = document.createElement("p");
-
-var scoreArea = document.createElement("div");
-
-var nextBtn = document.createElement("button");
-nextBtn.setAttribute("class", "right  btn");
-nextBtn.textContent = "Next";
-
-var submitBtn = document.createElement("button");
-    submitBtn.setAttribute("class", "btn");
-
-    submitBtn.textContent = "Submit score";
-
-var instructionsEl = document.createElement("p");
-instructionsEl.setAttribute("class", "center");
-instructionsEl.innerHTML = "The <b>JavaScript Fundamentals Quiz</b> is a timed, multiple-choice coding quiz to test your knowledge of the JavaScript fundamentals.  You will have 30 seconds to complete the 5 questions, but BE CAREFUL! Any wrong answer will cost you 5 seconds! <br/><br/>  Click the <i>Start Quiz</i> button below to begin. Good Luck!!";
-
-mainEl.appendChild(instructionsEl);
-
-var audioElement = document.createElement("audio");
-
-var questionEl = document.createElement("p");
-questionEl.setAttribute("class", "question");
-
-var userNameEl = document.createElement("input");
+var userNameEl = document.createElement("input"); //Used to collect user's initials after submitting quiz
     userNameEl.setAttribute("type", "text");
 
+//--Placeholder divs for questions, answers, scores and results
+var questionArea = document.createElement("div");
+var answerArea = document.createElement("div");
+var scoreArea = document.createElement("div");
+    scoreArea.setAttribute("class","scoreArea");
+var rationaleArea = document.createElement("div");
+
+//Elements for animation
+var gifImg = document.createElement("img");
+    gifImg.setAttribute("class", "gif");
+var audioElement = document.createElement("audio");
+
+
+//Buttons
+var startBtn = document.getElementById("start");
+var nextBtn = document.createElement("button");
+    nextBtn.setAttribute("class", "right  btn");
+    nextBtn.textContent = "Next";
+var submitBtn = document.createElement("button");
+    submitBtn.setAttribute("class", "btn");
+    submitBtn.textContent = "Submit score";
+
+//Initializing global variables
 var secondsLeft = 31;
 var numCorrect = 0;
 var numIncorrect = 0;
+var scores = [];
 
+//Create array of question objects to be used in game
 var questionsList = [{
     question: "1- What is the HTML tag that inline JavaScript code should be written under?",
     choices: ["A) <javascript>", "B) <script>", "C) <js> ", "D) <html>"],
@@ -80,94 +80,93 @@ var questionsList = [{
     rationale: "The action, which is built into the console object is the .log() method.  Whenever you write console.log() in JavaScript code, what is in the parenthesis will be printed to the console."
 }];
 
-var scores = [];
-var scoreEl = document.createElement("p");
+console.log("*** Welcome to my JavaScript Coding Quiz Application! ***"); //Page has loaded and js file read
 
-console.log("*** Welcome to my JavaScript Coding Quiz Application! ***");
+mainEl.appendChild(instructionsEl); //Adding instructions to mainEl when app first opens
 
+//startQuiz is called when the startBtn is clicked. It removes the instruction text and appends the question/answer areas
 function startQuiz(){
     console.log("--- Starting the startQuiz() function ---");
 
-    i = 0;
+    var i = 0;
 
-    setTimer();
+    setTimer(); //Call setTimer() function to begin countdown
 
+    //Remove the following elements/button that were originally displayed
     instructionsEl.remove();
     startBtn.remove();
-    // footerEl.setAttribute("style", "text-align:right");
 
+    //Add elements to begin the quiz:number correct/incorrect and questionArea and nextBtn
     headerEl.appendChild(correctEl);
     headerEl.appendChild(incorrectEl);
-
     mainEl.appendChild(questionArea);
     mainEl.appendChild(answerArea);
-
     questionArea.appendChild(questionEl);
-
     footerEl.appendChild(nextBtn);
 
+    //For loop adds 4 blank buttons with the classes choice and btn to the answerArea (which is uder questionArea in the mainEL div)
     for(j = 0; j< 4; j++){
         var answerEl = document.createElement("button");
         answerEl.setAttribute("class", "choice btn");
-
         answerArea.appendChild(answerEl);
+    };
 
-    };// for loop adds 4 blank buttons with classes choice and btn to the questionArea div
+    buildQuiz(i, questionEl); //Calls buildQuiz function and passes in index and the question
 
+    //Add event listener to the answerArea. If a button with the class of "choice" is clicked, call checkAnswer() function and pass the index and button that was clicked
+    answerArea.addEventListener("click", function(event){
+        event.preventDefault();
+        if(event.target.matches(".choice")){
+            checkAnswer(i, event.target);
+        }
+    });
 
-        buildQuiz(i, questionEl);
+    //Add event listener to the nextbutton.  When clicked, remove rationalArea, gifImg and audioElement
+    nextBtn.addEventListener("click", function(event){
+        event.preventDefault();
+        // console.log("Next button clicked!");
+        rationaleArea.remove();
+        gifImg.remove();
+        audioElement.remove();
 
-        answerArea.addEventListener("click", function(event){
-            event.preventDefault();
-            if(event.target.matches(".choice")){
-
-                checkAnswer(i, event.target);
-            }
-        });
-
-        nextBtn.addEventListener("click", function(event){
-            event.preventDefault();
-            console.log("Next button clicked!");
-            rationaleArea.remove();
-            gifImg.remove();
-            audioElement.remove();
-
-            if (i < questionsList.length - 1){
-                mainEl.appendChild(answerArea);
-                i++;
-                buildQuiz(i, questionEl);
-            }else{
-                secondsLeft = 1;
-                return;
-            }
-        });
-
+        //If i < questionsList.length (4) then add the answerArea and call the buildQuiz function and pass the index and question
+        if (i < questionsList.length - 1){
+            mainEl.appendChild(answerArea);
+            i++;
+            buildQuiz(i, questionEl);
+        }else{
+            secondsLeft = 1;
+            return;
+        }// If i is > 4, set secondsLeft to 1 and return from function
+    });
 }// End of startQuiz() function
 
+//buildQuiz function sets the questionEl to appropriate question text and the choice buttons to the appropriate answers
 function buildQuiz(index, questionElement){
     questionElement.textContent = questionsList[index].question;
     var buttons = document.querySelectorAll(".choice");
     for(j = 0; j < buttons.length; j++ ){
         buttons[j].textContent = questionsList[index].choices[j];
     }
-}
+}// End of buildQuiz() function
 
+//checkAnswer function takes in the index and clicked choice button to determine if the button clicked is the same as the correctAnswer in the questionsList object.
 function checkAnswer(index, button) {
-
     console.log("--- Starting checkAnswer() function ---");
 
-    gifImg.remove();
+    gifImg.remove(); //Removes the gifImg if present
 
+    //Clear out rationale text
     rationaleArea.innerHTML = "";
     rationaleEl.innerHTML = "";
 
+    //Set the gifImg and audioElements appropriately based on the button clicked. Also, set the rationale to be the questionList object's rationale. Otherwise, se
     if(questionsList[index].correctAnswer === button.textContent){
         console.log("CORRECT");
-
         gifImg.setAttribute("src", "https://media.giphy.com/media/3oEjI5VtIhHvK37WYo/giphy.gif");
         audioElement.setAttribute("src", "./Assets/soundsilk-Correct-Answer-Soundeffect.mp3");
 
-        numCorrect++;
+        numCorrect++; //Add one to numCorrect
         console.log("Number correct: " + numCorrect);
         rationaleArea.setAttribute("class", "correct");
         rationaleEl = "Correct! " + questionsList[index].rationale;
@@ -183,6 +182,7 @@ function checkAnswer(index, button) {
         gifImg.setAttribute("src", "https://media.giphy.com/media/3o7TKVfu4rwyscasla/giphy.gif")
         audioElement.setAttribute("src", "./Assets/movie_1.mp3");
 
+        //If there are less than 6 seconds, set secondsLeft to 1. Otherwise, subtract 5 from secondsLeft for each wrong answer
         if(secondsLeft > 6){
             secondsLeft -= 5;
         }else{
@@ -190,8 +190,9 @@ function checkAnswer(index, button) {
         }
     }
 
-    answerArea.remove();
+    answerArea.remove(); //remove answer buttons
 
+    //Add rationaleArea, gifImg, audioElement to page.  Values set in if/else statement above
     rationaleArea.append(button.textContent);
     rationaleArea.innerHTML += "<br>";
     mainEl.appendChild(rationaleArea);
@@ -199,19 +200,23 @@ function checkAnswer(index, button) {
     audioElement.play();
     mainEl.appendChild(gifImg);
 
+    //Update the correct/incorrect elements that are displayed on the header
     correctEl.textContent = "# Correct: " + numCorrect;
     incorrectEl.textContent ="# Incorrect: " +  numIncorrect;
-}
+}//End of checkAnswer()
 
+//showResults function displays the Quiz results and most recent scores on the page
 function showResults(){
     console.log("--- Starting showResults() function ---");
+
+    //Remove quiz/score elements and the nextBtn
     mainEl.innerHTML = "";
     correctEl.remove();
     incorrectEl.remove();
     nextBtn.remove();
-    timeEl.textContent = 0;
+    timeEl.textContent = "Time: 0"//Set timer to 0
 
-    scoreEl = (numCorrect * 20);
+    scoreEl = (numCorrect * 20); //Calculate the score based on numCorrect
 
     mainEl.innerHTML = "<b>Results:</b>";
     mainEl.innerHTML += "<br>";
@@ -226,12 +231,14 @@ function showResults(){
     mainEl.append(userNameEl);
 
     mainEl.appendChild(scoreArea);
-    scoreArea.innerHTML = "<br><b>Recent Scores:</b>";
+    scoreArea.innerHTML = "<br><b>Recently Submitted Scores:</b>";
 
-    footerEl.append(submitBtn);
+    footerEl.append(submitBtn); //Add submitBtn to footer
 
+    //create a scoresList ul to house the scores
     var scoresList = document.createElement("ul");
 
+    //check to see if there are any storedScores in localStorage. If so, set them to the empty scores array
     var storedScores = JSON.parse(localStorage.getItem("scores"));
     if (storedScores !== null){
         scores = storedScores;
@@ -249,28 +256,32 @@ function showResults(){
         scoreArea.appendChild(scoresList);
         scoresList.appendChild(li);
     }
-}
+}//End of showResults()
 
+//submitQuiz() function submits the user's name and score to the LocalStorage
 function submitQuiz(){
-    console.log(userNameEl.value.length);
-        console.log(userNameEl.value);
+    console.log("Starting submitQuiz() function");
 
-        if(userNameEl.value.length >= 2){
-            var userData = {
-                name: userNameEl.value,
-                score: scoreEl
-            }
-
-            scores.push(userData);
-
-            localStorage.setItem("scores", JSON.stringify(scores));
-
-            document.location.href = ""; //Restarts program from the beginning
-        }else{
-            alert("Enter 2 chars! Example: AS for Ashley Stith");
+    //If the userName input is 2 chars, create a userData object and set the values based on input. Otherwise user is alerted to put in 2 chars
+    if(userNameEl.value.length >= 2){
+        var userData = {
+            name: userNameEl.value,
+            score: scoreEl
         }
-}
 
+        //Add created object to stores array
+        scores.push(userData);
+
+        //Save in localStorage
+        localStorage.setItem("scores", JSON.stringify(scores));
+
+        document.location.href = ""; //Refreshes page and restarts program from the beginning
+    }else{
+        alert("Enter 2 chars! Example: AS for Ashley Stith");
+    }
+}// End of submitQuiz function
+
+//setTimer() function creates the countdown and calls the showResults() fucnction once the timer has reached 0
 function setTimer() {
     var timerInterval = setInterval(function() {
       secondsLeft--; //take one away from secondsLeft variable each time

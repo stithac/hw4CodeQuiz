@@ -8,13 +8,7 @@ h1{
   margin-bottom: 0;
 }
 
-.time{
-    font-weight:bold;
-    /* color: #FD8925; */
-    color: #784084;
-}
-
- .wrapper {
+.wrapper {
     padding-top: 30px;
     padding-left: 20px;
     padding-right: 20px;
@@ -108,15 +102,24 @@ h1{
     margin:0;
   }
 
-.score{
+/* timer element */
+.time{
+  font-weight:bold;
+  color: #784084;
+}
+
+/* correct/incorrect score elements in header */
+  .score{
   float:right;
   margin: 0 0 0 50px;
 }
 
+/* question elements */
 .question{
     font-weight: bold;
 }
 
+/* choice buttons */
 .choice{
     background-color:#ACE6AC;
     display: block;
@@ -124,29 +127,35 @@ h1{
     text-align: left;
     margin-bottom: 10px;
 }
+
 .choice:hover{
   background-color: #FCB36E;
 }
 
+/* class to right align elements */
 .right{
     text-align:right;
     margin-right: 20px;
 }
 
+/* class to center align elements */
 .center{
     text-align: center;
 
     align-content: center;
 }
 
+/* class for correct text: answer and rationale text */
 .correct{
   color: green;
 }
 
+/* class for incorrect text: answer and rationale text */
 .incorrect{
   color:red;
 }
 
+/* styles for gifImgs */
 .gif{
   display: block;
   margin: 0 auto;
@@ -154,4 +163,9 @@ h1{
   width:auto;
   border-radius: 5px;
   border: 1px black solid;
+}
+
+.scoreArea{
+  max-height: 200px;
+  overflow-y: scroll;
 }
