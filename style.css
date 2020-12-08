@@ -169,3 +169,20 @@ h1{
   max-height: 200px;
   overflow-y: scroll;
 }
+
+@media (max-width: 575px) {
+  .choice {
+    width:200px;
+    white-space: normal;
+    word-wrap: break-word;
+    margin-left:0;
+  }
+  .gif{
+    max-width: 200px;
+  }
+
+  input{
+    width: 200px;
+  }
+
+}
