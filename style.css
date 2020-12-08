@@ -113,6 +113,9 @@ body {
     text-align: left;
     margin-bottom: 10px;
 }
+.choice:hover{
+  background-color: #FCB36E;
+}
 
 .right{
     text-align:right;
