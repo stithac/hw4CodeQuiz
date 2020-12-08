@@ -126,6 +126,7 @@ function startQuiz(){
             event.preventDefault();
             console.log("Next button clicked!");
             rationaleArea.remove();
+            gifImg.remove();
 
             if (i < questionsList.length - 1){
                 mainEl.appendChild(answerArea);
@@ -150,6 +151,8 @@ function buildQuiz(index, questionElement){
 function checkAnswer(index, button) {
 
     console.log("--- Starting checkAnswer() function ---");
+
+    gifImg.remove();
 
     rationaleArea.innerHTML = "";
     rationaleEl.innerHTML = "";
@@ -178,13 +181,14 @@ function checkAnswer(index, button) {
     }
 
     answerArea.remove();
-    mainEl.appendChild(gifImg);
 
     rationaleArea.append(button.textContent);
     rationaleArea.innerHTML += "<br><br>";
     mainEl.appendChild(rationaleArea);
     rationaleArea.append(rationaleEl);
 
+
+    mainEl.appendChild(gifImg);
 
 
     correctEl.textContent = "# Correct: " + numCorrect;
