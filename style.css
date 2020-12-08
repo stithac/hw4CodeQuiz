@@ -5,6 +5,7 @@ body {
 
 h1{
   font-family: 'Special Elite', cursive;
+  margin-bottom: 0;
 }
 
 .time{
@@ -34,7 +35,9 @@ h1{
 
   .card-header {
     text-align: center;
-    padding: 0px;
+    padding: 0;
+    background-color: #D094B7;
+    border: 1px solid black;
   }
 
   .card-header::after {
@@ -42,15 +45,19 @@ h1{
     display: block;
     width: 100%;
     background: #e7e9eb;
-    height: 2px;
+    /* height: 2px; */
   }
 
   .card-body {
     min-height: 100px;
+    border: 1px solid black;
   }
 
   .card-footer {
     text-align: center;
+    padding: 0;
+    /* background-color: #B76568; */
+    border: 1px solid black;
   }
 
   .card-footer::before {
@@ -58,7 +65,7 @@ h1{
     display: block;
     width: 100%;
     background: #e7e9eb;
-    height: 2px;
+    /* height: 2px; */
   }
 
   .card-footer::after {
@@ -69,8 +76,8 @@ h1{
 
   .btn {
     border: none;
-    /* background-color: #FD8925; */
     background-color: #D094B7;
+    /* background-color: #784084; */
     border-radius: 25px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
       0px;
@@ -94,11 +101,11 @@ h1{
     margin-top:10px;
     font-size:12px;
     background-color: #EFE8BE;
+    border-top: 1px solid #d3d3d3;
   }
 
   footer p{
     margin:0;
-    padding: 5px;
   }
 
 .score{

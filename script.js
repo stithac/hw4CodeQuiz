@@ -185,7 +185,7 @@ function checkAnswer(index, button) {
     answerArea.remove();
 
     rationaleArea.append(button.textContent);
-    rationaleArea.innerHTML += "<br><br>";
+    rationaleArea.innerHTML += "<br>";
     mainEl.appendChild(rationaleArea);
     rationaleArea.append(rationaleEl);
 
