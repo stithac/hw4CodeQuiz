@@ -167,7 +167,7 @@ h1{
 
 .scoreArea{
   max-height: 200px;
-  overflow-y: scroll;
+  overflow-y: scroll !important;
 }
 
 @media (max-width: 575px) {
