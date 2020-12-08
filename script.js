@@ -47,7 +47,7 @@ questionEl.setAttribute("class", "question");
 var userNameEl = document.createElement("input");
     userNameEl.setAttribute("type", "text");
 
-var secondsLeft = 20;
+var secondsLeft = 61;
 var numCorrect = 0;
 var numIncorrect = 0;
 
@@ -164,6 +164,8 @@ function checkAnswer(index, button) {
         rationaleArea.setAttribute("class", "correct");
         rationaleEl = "Correct! " + questionsList[index].rationale;
 
+        gifImg.setAttribute("src", "https://media.giphy.com/media/3oEjI5VtIhHvK37WYo/giphy.gif")
+
     }else if(questionsList[index].correctAnswer != button.textContent){
 
         console.log("Incorrect!");
@@ -187,9 +189,7 @@ function checkAnswer(index, button) {
     mainEl.appendChild(rationaleArea);
     rationaleArea.append(rationaleEl);
 
-
     mainEl.appendChild(gifImg);
-
 
     correctEl.textContent = "# Correct: " + numCorrect;
     incorrectEl.textContent ="# Incorrect: " +  numIncorrect;
