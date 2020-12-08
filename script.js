@@ -8,11 +8,15 @@ var footerEl = document.querySelector(".card-footer");
 var headerEl = document.querySelector(".card-header");
 
 var correctEl = document.createElement("p");
-correctEl.textContent = "# Correct: "
-correctEl.setAttribute("class", "score right");
+    correctEl.textContent = "# Correct: "
+    correctEl.setAttribute("class", "score right");
+
 var incorrectEl = document.createElement("p");
-incorrectEl.textContent = "# Incorrect: ";
-incorrectEl.setAttribute("class", "score right");
+    incorrectEl.textContent = "# Incorrect: ";
+    incorrectEl.setAttribute("class", "score right");
+
+var gifImg = document.createElement("img");
+    gifImg.setAttribute("class", "gif");
 
 var questionArea = document.createElement("div");
 var answerArea = document.createElement("div");
@@ -165,6 +169,7 @@ function checkAnswer(index, button) {
         rationaleArea.setAttribute("class", "incorrect");
         rationaleEl.textContent = "Incorrect! The correct answer is : " + questionsList[index].correctAnswer + ". " + questionsList[index].rationale;
 
+        gifImg.setAttribute("src", "https://media.giphy.com/media/3o7TKVfu4rwyscasla/giphy.gif")
         if(secondsLeft > 6){
             secondsLeft -= 5;
         }else{
@@ -173,11 +178,14 @@ function checkAnswer(index, button) {
     }
 
     answerArea.remove();
+    mainEl.appendChild(gifImg);
 
     rationaleArea.append(button.textContent);
     rationaleArea.innerHTML += "<br><br>";
     mainEl.appendChild(rationaleArea);
     rationaleArea.append(rationaleEl);
+
+
 
     correctEl.textContent = "# Correct: " + numCorrect;
     incorrectEl.textContent ="# Incorrect: " +  numIncorrect;
