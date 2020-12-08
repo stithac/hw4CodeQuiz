@@ -41,6 +41,8 @@ instructionsEl.innerHTML = "The <b>JavaScript Fundamentals Quiz</b> is a timed, 
 
 mainEl.appendChild(instructionsEl);
 
+var audioElement = document.createElement("audio");
+
 var questionEl = document.createElement("p");
 questionEl.setAttribute("class", "question");
 
@@ -118,6 +120,7 @@ function startQuiz(){
         answerArea.addEventListener("click", function(event){
             event.preventDefault();
             if(event.target.matches(".choice")){
+
                 checkAnswer(i, event.target);
             }
         });
@@ -127,6 +130,7 @@ function startQuiz(){
             console.log("Next button clicked!");
             rationaleArea.remove();
             gifImg.remove();
+            audioElement.remove();
 
             if (i < questionsList.length - 1){
                 mainEl.appendChild(answerArea);
@@ -159,12 +163,14 @@ function checkAnswer(index, button) {
 
     if(questionsList[index].correctAnswer === button.textContent){
         console.log("CORRECT");
+
+        gifImg.setAttribute("src", "https://media.giphy.com/media/3oEjI5VtIhHvK37WYo/giphy.gif");
+        audioElement.setAttribute("src", "./Assets/soundsilk-Correct-Answer-Soundeffect.mp3");
+
         numCorrect++;
         console.log("Number correct: " + numCorrect);
         rationaleArea.setAttribute("class", "correct");
         rationaleEl = "Correct! " + questionsList[index].rationale;
-
-        gifImg.setAttribute("src", "https://media.giphy.com/media/3oEjI5VtIhHvK37WYo/giphy.gif")
 
     }else if(questionsList[index].correctAnswer != button.textContent){
 
@@ -175,6 +181,8 @@ function checkAnswer(index, button) {
         rationaleEl.textContent = "Incorrect! The correct answer is : " + questionsList[index].correctAnswer + ". " + questionsList[index].rationale;
 
         gifImg.setAttribute("src", "https://media.giphy.com/media/3o7TKVfu4rwyscasla/giphy.gif")
+        audioElement.setAttribute("src", "./Assets/movie_1.mp3");
+
         if(secondsLeft > 6){
             secondsLeft -= 5;
         }else{
@@ -188,7 +196,7 @@ function checkAnswer(index, button) {
     rationaleArea.innerHTML += "<br>";
     mainEl.appendChild(rationaleArea);
     rationaleArea.append(rationaleEl);
-
+    audioElement.play();
     mainEl.appendChild(gifImg);
 
     correctEl.textContent = "# Correct: " + numCorrect;
@@ -221,7 +229,6 @@ function showResults(){
     scoreArea.innerHTML = "<br><b>Recent Scores:</b>";
 
     footerEl.append(submitBtn);
-
 
     var scoresList = document.createElement("ul");
 
