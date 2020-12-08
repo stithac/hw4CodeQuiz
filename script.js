@@ -169,7 +169,7 @@ function checkAnswer(index, button) {
         numCorrect++; //Add one to numCorrect
         console.log("Number correct: " + numCorrect);
         rationaleArea.setAttribute("class", "correct");
-        rationaleEl = "Correct! " + questionsList[index].rationale;
+        rationaleEl.textContent = "Correct! " + questionsList[index].rationale;
 
     }else if(questionsList[index].correctAnswer != button.textContent){
 
