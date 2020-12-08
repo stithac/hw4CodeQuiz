@@ -1,9 +1,11 @@
 body {
     font-family: sans-serif;
+    background-image: url("././Assets/question_background.jpg");
   }
 
 .time{
     font-weight:bold;
+    color: #FD8925;
 }
 
  .wrapper {
@@ -13,7 +15,7 @@ body {
 }
 
   .card {
-    /* background-color:#030926; */
+    background-color:#EFE8BE;
     border-radius: 5px;
     border-width: 1px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
@@ -62,11 +64,10 @@ body {
 
   .btn {
     border: none;
-    /* background-color: #01D3F1; */
+    background-color: #FD8925;
     border-radius: 25px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
       0px;
-    color: #030926;
     display: inline-block;
     font-size: 22px;
     line-height: 22px;
@@ -103,6 +104,7 @@ body {
 }
 
 .choice{
+    background-color: #D094B7;
     display: block;
     width: 400px;
     text-align: left;
