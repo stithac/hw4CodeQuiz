@@ -59,8 +59,8 @@ var questionsList = [{
     rationale: "In JavaScript, functions are called directly using the syntax: functionName()"
 },{
     question: "3- How do you write an 'if' statement in JavaScript?",
-    choices: ["A) if(i === 0){//do this}", "B) if(i = 0; i < 3; i++)(//do this)", "C) if{i < 5}{//do this} ", "D) if i == 0(//do this)"],
-    correctAnswer: "A) if(i === 0){//do this}",
+    choices: ["A) if( i === 0 ){ //do this }", "B) if( i = 0; i < 3; i++ )( //do this )", "C) if{ i < 5 }{ //do this } ", "D) if i == 0( //do this )"],
+    correctAnswer: "A) if( i === 0 ){ //do this }",
     rationale: "The syntax for an if statement in JavaScript is if(condition){}"
 },{
     question: "4- What is the correct syntax for adding a single line comment in JavaScript?",
@@ -206,7 +206,7 @@ function showResults(){
     mainEl.append(userNameEl);
 
     mainEl.appendChild(scoreArea);
-    scoreArea.innerHTML = "<b>Recent Scores:</b>";
+    scoreArea.innerHTML = "<br><b>Recent Scores:</b>";
 
     footerEl.append(submitBtn);
 
@@ -230,7 +230,6 @@ function showResults(){
         scoreArea.appendChild(scoresList);
         scoresList.appendChild(li);
     }
-
 }
 
 function submitQuiz(){
@@ -243,17 +242,14 @@ function submitQuiz(){
                 score: scoreEl
             }
 
-
             scores.push(userData);
 
             localStorage.setItem("scores", JSON.stringify(scores));
-
 
             document.location.href = ""; //Restarts program from the beginning
         }else{
             alert("Enter 2 chars! Example: AS for Ashley Stith");
         }
-        
 }
 
 function setTimer() {
